@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: Colors.black,
       ),
-      debugShowCheckedModeBanner: false, // Disable debug banner
+      debugShowCheckedModeBanner: false,
       home: const CalculatorPage(),
     );
   }
@@ -76,7 +76,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
           style: ElevatedButton.styleFrom(
             backgroundColor: color ?? Colors.grey[850],
             foregroundColor: textColor ?? Colors.white,
-            shape: const StadiumBorder(), // Changed to StadiumBorder for rectangular button
+            shape: const StadiumBorder(),
             padding: const EdgeInsets.all(20.0),
           ),
           child: Text(
