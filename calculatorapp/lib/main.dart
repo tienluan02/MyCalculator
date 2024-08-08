@@ -59,7 +59,21 @@ class _CalculatorPageState extends State<CalculatorPage> {
         }
         _input = _output;
         _operator = "";
-      } else {
+      } else if (value == "%") {
+          _input = (double.parse(_input) / 100).toString();
+          _output = _input;
+      } else if (value == "+/-") {
+          if (_input.startsWith("-")) {
+            _input = _input.substring(1);
+          } else if (_input == '') {
+            _input = "-0$";
+          } else {
+            _input = "-$_input";
+          }
+          _output = _input;
+      } else if (value == ','){
+
+      } else{
         _input += value;
         _output = _input;
       }
@@ -115,10 +129,8 @@ class _CalculatorPageState extends State<CalculatorPage> {
               Row(
                 children: <Widget>[
                   _buildButton("C", color: Colors.grey),
-                  if (_input.isNotEmpty) ...[
                     _buildButton("+/-", color: Colors.grey),
                     _buildButton("%", color: Colors.grey),
-                  ],
                   _buildButton("÷", color: Colors.orange),
                 ],
               ),
