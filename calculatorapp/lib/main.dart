@@ -60,27 +60,35 @@ class _CalculatorPageState extends State<CalculatorPage> {
         _input = _output;
         _operator = "";
       } else if (value == "%") {
-          _input = (double.parse(_input) / 100).toString();
-          _output = _input;
+        _input = (double.parse(_input) / 100).toString();
+        _output = _input;
       } else if (value == "+/-") {
-          if (_input.startsWith("-")) {
-            _input = _input.substring(1);
-          } else if (_input == '') {
-            _input = "-0$";
-          } else {
-            _input = "-$_input";
-          }
-          _output = _input;
-      } else if (value == ','){
-
-      } else{
-        _input += value;
+        if (_input == '') {
+          _input = '-0';
+        } else if (_input == '-0') {
+          _input = '0';
+        } else if (_input.startsWith("-")) {
+          _input = _input.substring(1);
+        } else {
+          _input = "-$_input";
+        }
+        _output = _input;
+      } else if (value == ',') {
+      } else {
+        if (_input == '0') {
+          _input = value;
+        } else if (_input == '-0') {
+          _input = "-$value";
+        } else {
+          _input += value;
+        }
         _output = _input;
       }
     });
   }
 
-  Widget _buildButton(String value, {Color? color, Color? textColor, int flex = 1}) {
+  Widget _buildButton(String value,
+      {Color? color, Color? textColor, int flex = 1}) {
     return Expanded(
       flex: flex,
       child: Padding(
@@ -129,8 +137,8 @@ class _CalculatorPageState extends State<CalculatorPage> {
               Row(
                 children: <Widget>[
                   _buildButton("C", color: Colors.grey),
-                    _buildButton("+/-", color: Colors.grey),
-                    _buildButton("%", color: Colors.grey),
+                  _buildButton("+/-", color: Colors.grey),
+                  _buildButton("%", color: Colors.grey),
                   _buildButton("÷", color: Colors.orange),
                 ],
               ),
