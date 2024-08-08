@@ -115,8 +115,10 @@ class _CalculatorPageState extends State<CalculatorPage> {
               Row(
                 children: <Widget>[
                   _buildButton("C", color: Colors.grey),
-                  _buildButton("+/-", color: Colors.grey),
-                  _buildButton("%", color: Colors.grey),
+                  if (_input.isNotEmpty) ...[
+                    _buildButton("+/-", color: Colors.grey),
+                    _buildButton("%", color: Colors.grey),
+                  ],
                   _buildButton("÷", color: Colors.orange),
                 ],
               ),
