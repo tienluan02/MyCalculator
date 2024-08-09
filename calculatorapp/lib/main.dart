@@ -48,6 +48,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
         _operator = value;
         _num1 = double.parse(_input);
         _input = "";
+        _commaPressed = false; // Reset comma flag for new number
       } else if (value == "=") {
         _num2 = double.parse(_input);
         if (_operator == "+") {
@@ -61,11 +62,13 @@ class _CalculatorPageState extends State<CalculatorPage> {
         }
         _input = _output;
         _operator = "";
+        _commaPressed = _output.contains(".");
       } else if (value == "%") {
         _input = (double.parse(_input) / 100).toString();
         _output = _input;
+        _commaPressed = _output.contains(".");
       } else if (value == "+/-") {
-        if (_input == '') {
+        if (_input.isEmpty) {
           _input = '-0';
         } else if (_input == '-0') {
           _input = '0';
@@ -77,7 +80,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
         _output = _input;
       } else if (value == ',') {
         if (!_commaPressed) {
-          if (_input == '') {
+          if (_input.isEmpty) {
             _input = '0.';
           } else if (_input == '-0') {
             _input = '-0.';
@@ -97,6 +100,8 @@ class _CalculatorPageState extends State<CalculatorPage> {
         }
         _output = _input;
       }
+
+      _output = _output.replaceAll('.', ',');
     });
   }
 
