@@ -74,6 +74,12 @@ class _CalculatorPageState extends State<CalculatorPage> {
         }
         _output = _input;
       } else if (value == ',') {
+        if (_input == '') {
+          _input = '0.';
+        } else if (_input == '-0') {
+          _input = '-0.';
+        }
+        _output = _input;
       } else {
         if (_input == '0') {
           _input = value;
