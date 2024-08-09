@@ -33,6 +33,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
   String _operator = "";
   double _num1 = 0;
   double _num2 = 0;
+  bool _commaPressed = false;
 
   void _buttonPressed(String value) {
     setState(() {
@@ -42,6 +43,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
         _operator = "";
         _num1 = 0;
         _num2 = 0;
+        _commaPressed = false;
       } else if (value == "+" || value == "-" || value == "×" || value == "÷") {
         _operator = value;
         _num1 = double.parse(_input);
@@ -74,12 +76,17 @@ class _CalculatorPageState extends State<CalculatorPage> {
         }
         _output = _input;
       } else if (value == ',') {
-        if (_input == '') {
-          _input = '0.';
-        } else if (_input == '-0') {
-          _input = '-0.';
+        if (!_commaPressed) {
+          if (_input == '') {
+            _input = '0.';
+          } else if (_input == '-0') {
+            _input = '-0.';
+          } else {
+            _input += '.';
+          }
         }
         _output = _input;
+        _commaPressed = true;
       } else {
         if (_input == '0') {
           _input = value;
