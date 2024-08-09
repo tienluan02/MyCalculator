@@ -48,18 +48,29 @@ class _CalculatorPageState extends State<CalculatorPage> {
         _operator = value;
         _num1 = double.parse(_input);
         _input = "";
-        _commaPressed = false; // Reset comma flag for new number
+        _commaPressed = false;
       } else if (value == "=") {
         _num2 = double.parse(_input);
+        double result;
+
         if (_operator == "+") {
-          _output = (_num1 + _num2).toString();
+          result = _num1 + _num2;
         } else if (_operator == "-") {
-          _output = (_num1 - _num2).toString();
+          result = _num1 - _num2;
         } else if (_operator == "×") {
-          _output = (_num1 * _num2).toString();
+          result = _num1 * _num2;
         } else if (_operator == "÷") {
-          _output = (_num1 / _num2).toString();
+          result = _num1 / _num2;
+        } else {
+          result = _num2;
         }
+
+        if (result == result.toInt()) {
+          _output = result.toInt().toString();
+        } else {
+          _output = result.toString();
+        }
+
         _input = _output;
         _operator = "";
         _commaPressed = _output.contains(".");
